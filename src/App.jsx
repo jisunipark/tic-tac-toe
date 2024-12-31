@@ -1,5 +1,7 @@
+import Board from "./Board";
+
 function App() {
-  return <div>hello</div>;
+  return <Board />;
 }
 
 export default App;
