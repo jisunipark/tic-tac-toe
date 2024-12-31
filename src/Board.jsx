@@ -2,14 +2,8 @@ import { Square } from "./Square";
 import { useGameStore } from "./store";
 
 export default function Board() {
-  const [xIsNext, setXIsNext] = useGameStore((state) => [
-    state.xIsNext,
-    state.setXIsNext,
-  ]);
-  const [squares, setSquares] = useGameStore((state) => [
-    state.squares,
-    state.setSquares,
-  ]);
+  const { squares, xIsNext, setSquares, setXIsNext } = useGameStore();
+
   const player = xIsNext ? "X" : "O";
 
   function handleClick(i) {
@@ -31,13 +25,13 @@ export default function Board() {
         border: "1px solid #999",
       }}
     >
-      {squares.map((square, squareIndex) => {
+      {squares.map((square, squareIndex) => (
         <Square
           key={squareIndex}
           value={square}
           onSquareClick={() => handleClick(squareIndex)}
-        />;
-      })}
+        />
+      ))}
     </div>
   );
 }
