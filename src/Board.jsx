@@ -2,16 +2,22 @@ import { Square } from "./Square";
 import { useGameStore } from "./store";
 
 export default function Board() {
+  const [xIsNext, setXIsNext] = useGameStore((state) => [
+    state.xIsNext,
+    state.setXIsNext,
+  ]);
   const [squares, setSquares] = useGameStore((state) => [
     state.squares,
     state.setSquares,
   ]);
+  const player = xIsNext ? "X" : "O";
 
   function handleClick(i) {
     if (squares[i]) return;
     const nextSquares = squares.slice();
-    nextSquares[i] = "X";
+    nextSquares[i] = player;
     setSquares(nextSquares);
+    setXIsNext(!xIsNext);
   }
 
   return (
