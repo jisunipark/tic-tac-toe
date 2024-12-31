@@ -1,10 +1,7 @@
 import { calculateStatus, calculateTurns, calculateWinner } from "./logic";
 import { Square } from "./Square";
-import { useGameStore } from "./store";
 
-export default function Board() {
-  const { squares, xIsNext, setSquares, setXIsNext } = useGameStore();
-
+export default function Board({ xIsNext, squares, onPlay }) {
   const winner = calculateWinner(squares);
   const turns = calculateTurns(squares);
   const player = xIsNext ? "X" : "O";
@@ -14,8 +11,7 @@ export default function Board() {
     if (squares[i] || winner) return;
     const nextSquares = squares.slice();
     nextSquares[i] = player;
-    setSquares(nextSquares);
-    setXIsNext(!xIsNext);
+    onPlay(nextSquares);
   }
 
   return (
